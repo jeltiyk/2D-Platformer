@@ -14,7 +14,7 @@ public class Throw : MonoBehaviour
     }
     
     [Header("Throwing position")]
-    [SerializeField] private Transform position;
+    [SerializeField] private GameObject position;
 
     [Header("Throw")] 
     [SerializeField] private GameObject @object;
@@ -57,6 +57,11 @@ public class Throw : MonoBehaviour
         _angularRange = countOfObjects * AngularMultiplier;
     }
 
+    private void LateUpdate()
+    {
+        _angularRange = countOfObjects * AngularMultiplier;
+    }
+
     public void ThrowObject()
     {
         StartCoroutine(ObjectsController(ThrowMode.Throw));
@@ -82,13 +87,13 @@ public class Throw : MonoBehaviour
         {
             case ThrowMode.Throw:
 
-                if (_actionsController.PlayerController.ThrowableObjects > 0)
+                if (_actionsController.PlayerController.CurrentObjects > 0)
                 {
-                    GameObject thrownObject = Instantiate(multipleObject, position.position, Quaternion.identity);
+                    GameObject thrownObject = Instantiate(@object, position.transform.position, Quaternion.identity);
                     thrownObject.GetComponent<Rigidbody2D>().AddForce(transform.right * objectSpeed, ForceMode2D.Impulse);
 
-                    _actionsController.PlayerController.ThrowableObjects--;
-                
+                    _actionsController.PlayerController.OnChangePineCones(-1);
+
                     Destroy(thrownObject, time);
                     
                     yield return new WaitForSeconds(frequency);
@@ -97,17 +102,17 @@ public class Throw : MonoBehaviour
                 break;
             case ThrowMode.MultipleThrow:
                 
-                if (_actionsController.PlayerController.ThrowableObjects < countObjects)
-                    countObjects = _actionsController.PlayerController.ThrowableObjects;
+                if (_actionsController.PlayerController.CurrentObjects < countObjects)
+                    countObjects = _actionsController.PlayerController.CurrentObjects;
                 
                 while (countObjects > 0)
                 {
-                    GameObject thrownObjects = Instantiate(multipleObject, position.position, Quaternion.identity);
+                    GameObject thrownObjects = Instantiate(multipleObject, position.transform.position, Quaternion.identity);
                     thrownObjects.GetComponent<Rigidbody2D>().AddForce(transform.right * objectSpeed, ForceMode2D.Impulse);
     
                     countObjects--;
-                    _actionsController.PlayerController.ThrowableObjects--;
-                
+                    _actionsController.PlayerController.OnChangePineCones(-1);
+
                     Destroy(thrownObjects, time);
                     
                     yield return new WaitForSeconds(frequency);
@@ -116,7 +121,7 @@ public class Throw : MonoBehaviour
                 break;
             case ThrowMode.ThrowInRange:
                 
-                if (_actionsController.PlayerController.ThrowableObjects >= countObjects * countOfObjects)
+                if (_actionsController.PlayerController.CurrentObjects >= countObjects * countOfObjects)
                 {
                     while (countObjects > 0)
                     {
@@ -157,7 +162,7 @@ public class Throw : MonoBehaviour
                         while (objects >= 0)
                         {
                             thrownObjects[objects] =
-                                Instantiate(objectRange, position.position,
+                                Instantiate(objectRange, position.transform.position,
                                     Quaternion.identity);
                             thrownObjects[objects].GetComponent<Rigidbody2D>()
                                 .AddForce(
@@ -176,7 +181,7 @@ public class Throw : MonoBehaviour
                             
                             objects--;
                             currentAngle -= angleStep;
-                            _actionsController.PlayerController.ThrowableObjects--;
+                            _actionsController.PlayerController.OnChangePineCones(-1);
                         }
     
                         countObjects--;

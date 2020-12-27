@@ -9,14 +9,14 @@ public class TrapController : MonoBehaviour
     private DateTime _lastEncounter;
     private PlayerController _playerController;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        _playerController = collision.GetComponent<PlayerController>();
+        _playerController = other.GetComponent<PlayerController>();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if (_playerController == collision.GetComponent<PlayerController>())
+        if (_playerController == other.GetComponent<PlayerController>())
             _playerController = null;
     }
 

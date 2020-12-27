@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7765435579566576323}
   - component: {fileID: 4270301194963069160}
   - component: {fileID: 1937534583244012858}
-  - component: {fileID: 3929151219088215244}
+  - component: {fileID: -2444386624946345920}
+  - component: {fileID: 5127395369563276029}
   m_Layer: 11
   m_Name: Key
   m_TagString: Untagged
@@ -69,8 +70,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 347197313
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1694913177206695654, guid: 62029c2bc5afb55489bf32cf42c646d0,
     type: 3}
@@ -103,7 +104,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3929151219088215244
+--- !u!58 &-2444386624946345920
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937126577958792061}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &5127395369563276029
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,7 +129,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 937126577958792061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecfad7e7f32e31242a1b5e9d9df22ca8, type: 3}
+  m_Script: {fileID: 11500000, guid: 482d9354b47395d418b5d1e112699f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heal: 25
+  gameUI: {fileID: 2440469345375797709, guid: 03c93f7de91cfa64e872f3a647bdb5d1, type: 3}
+  toNextLevel: 1

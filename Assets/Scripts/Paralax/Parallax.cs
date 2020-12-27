@@ -1,10 +1,23 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
     [SerializeField] protected Transform cameraTransform;
     [SerializeField] private float parallaxEffect;
     [SerializeField] private bool lockY;
+
+    private void Awake()
+    {
+        if(cameraTransform != null) return;
+
+        GameObject findObject = GameObject.Find("Main Camera");
+        
+        if(findObject == null) return;
+
+        cameraTransform = findObject.transform;
+    }
+
     void FixedUpdate()
     {
         if (lockY)

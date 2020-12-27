@@ -1,10 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Movement))]
-public class PCController : MonoBehaviour
+[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(ActionsController), typeof(Throw))]
+public class PCController : Movement
 {
-    private Movement _playerMovement;
     private ActionsController _actionsController;
     
     private float _move;
@@ -16,12 +16,19 @@ public class PCController : MonoBehaviour
     private DateTime _keyHoldTime;
     private float _keyTime;
 
-    private void Start()
+    private void Awake()
     {
-        _playerMovement = GetComponent<Movement>();
+        // fields in movement class
+        PlayerRb = GetComponent<Rigidbody2D>();
+        PlayerAnimator = GetComponent<Animator>();
+        
+        CellCheckSize = new Vector2(cellSizeX, 0.025f);
+        GroundCheckSize = new Vector2(groundSizeX, 0.025f);
+        // ===
+        
         _actionsController = GetComponent<ActionsController>();
     }
-
+    
     private void Update()
     {
         #region Move
@@ -102,11 +109,10 @@ public class PCController : MonoBehaviour
 
         #endregion
     }
-
-
+    
     private void FixedUpdate()
     {
-        _playerMovement.Move(_move, _jump);
+        Move(_move, _jump);
         _actionsController.Actions(_throw, _throwInRange, _keyTime);
 
         _keyTime = 0;

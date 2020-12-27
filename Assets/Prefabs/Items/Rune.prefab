@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5371961456232466778}
   - component: {fileID: 5485437566437201763}
   - component: {fileID: 7979706603116180183}
+  - component: {fileID: -8379855138743282172}
   m_Layer: 11
   m_Name: Rune
   m_TagString: Untagged
@@ -116,3 +117,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heal: 25
+--- !u!58 &-8379855138743282172
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5708469075527020949}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

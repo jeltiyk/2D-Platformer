@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Throw))]
 [RequireComponent(typeof(PlayerController))]
 class ActionsController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ class ActionsController : MonoBehaviour
     
     [Header("Ignore hold time for throw in range")] 
     [SerializeField] private bool ignore;
+
+    private GameObject _borders;
     
     #region Properties
     
@@ -23,10 +26,13 @@ class ActionsController : MonoBehaviour
     {
         Throw = GetComponent<Throw>();
         PlayerController = GetComponent<PlayerController>();
+        _borders = PlayerController.GetComponent<Movement>().BordersObject;
     }
 
     public void Actions(bool @throw, bool inRange, float keyHoldTime)
     {
+        if(!_borders.activeSelf) return;
+
         if (@throw)
         {
             if(this.@throw && keyHoldTime <= Throw.MINTime)
